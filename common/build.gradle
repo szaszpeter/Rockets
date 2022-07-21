@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
@@ -16,7 +16,6 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.codarchy.cleanarchitecture"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -64,7 +63,7 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
+    libraryVariants.all { variant ->
         variant.sourceSets.java.each {
             it.srcDirs += "build/generated/ksp/${variant.name}/kotlin"
         }
@@ -73,7 +72,6 @@ android {
 
 
 dependencies {
-    implementation project(":presentation")
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
