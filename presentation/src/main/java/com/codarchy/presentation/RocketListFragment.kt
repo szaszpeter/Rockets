@@ -14,7 +14,7 @@ import com.codarchy.common.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LandingFragment : Fragment() {
+class RocketListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
