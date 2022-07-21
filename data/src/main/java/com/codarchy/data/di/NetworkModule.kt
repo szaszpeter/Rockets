@@ -1,7 +1,7 @@
 package com.codarchy.data.di
 
 import android.content.Context
-import com.codarchy.data.network.AgeApi
+import com.codarchy.data.network.RocketApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,12 +29,12 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAgeApi(okHttpClient: OkHttpClient): AgeApi = Retrofit
+    fun provideRocketApi(okHttpClient: OkHttpClient): RocketApi = Retrofit
         .Builder()
         .client(okHttpClient)
-        .baseUrl("https://api.agify.io")
+        .baseUrl("https://api.spacexdata.com")
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
-        .create(AgeApi::class.java)
+        .create(RocketApi::class.java)
 
 }
