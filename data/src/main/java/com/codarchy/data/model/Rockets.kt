@@ -1,7 +1,5 @@
 package com.codarchy.data.model
 
-data class Rockets(val rocketList: List<Rocket> = emptyList())
-
 data class Rocket(
     val id: String,
     val name: String,

@@ -3,11 +3,6 @@ package com.codarchy.data.network
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-//@JsonClass(generateAdapter = true)
-//data class RocketsResponse(
-//    @Json val rocketList: List<RocketResponse>
-//)
-
 @JsonClass(generateAdapter = true)
 data class RocketResponse(
     @Json(name = "id") val id: String,

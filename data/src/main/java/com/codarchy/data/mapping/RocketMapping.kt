@@ -1,12 +1,7 @@
 package com.codarchy.data.mapping
 
 import com.codarchy.data.model.Rocket
-import com.codarchy.data.model.Rockets
 import com.codarchy.data.network.*
-
-//fun RocketsResponse.toRocketList(): Rockets = Rockets(rocketList.map { it.toRocket() })
-
-
 
 fun RocketResponse.toRocket(): Rocket = Rocket(
     id,
