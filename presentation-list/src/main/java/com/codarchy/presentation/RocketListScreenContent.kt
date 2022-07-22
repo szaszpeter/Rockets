@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.R
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -17,12 +18,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.Navigation
 import com.codarchy.presentation.fab.MultiFabState
 import com.codarchy.presentation.fab.MultiFloatingActionButton
 import com.codarchy.presentation.list.RocketList
@@ -30,6 +33,7 @@ import com.codarchy.presentation.list.RocketList
 
 @Composable
 fun RocketListScreenContent(viewModel: RocketListViewModel = hiltViewModel()) {
+    val view = LocalView.current
     var toState by remember { mutableStateOf(MultiFabState.COLLAPSED) }
 
     Scaffold(
@@ -47,7 +51,10 @@ fun RocketListScreenContent(viewModel: RocketListViewModel = hiltViewModel()) {
                 is Loading -> Loading()
                 is NetworkError -> ErrorContent()
                 is GenericError -> ErrorContent()
-                is RocketListReady -> RocketList(viewModel)
+                is RocketListReady -> RocketList(viewModel) {
+                    Navigation.findNavController(view)
+                        .navigate(com.codarchy.common.R.id.action_landingFragment_to_rocketDetailsFragment)
+                }
             }
         }
         val alpha = if (toState == MultiFabState.EXPANDED) 0.4f else 0f

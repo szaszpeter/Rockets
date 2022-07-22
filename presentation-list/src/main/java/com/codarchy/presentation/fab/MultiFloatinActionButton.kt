@@ -56,7 +56,7 @@ fun MultiFloatingActionButton(
                 MultiFabItem(
                     "active",
                     "Only Active",
-                    ImageBitmap.imageResource(id = drawable.ic_airplanemode_inactive)
+                    ImageBitmap.imageResource(id = drawable.ic_airplanemode_active)
                 ), onFabItemClicked, scale, alpha
             )
             Spacer(modifier = Modifier.height(20.dp))

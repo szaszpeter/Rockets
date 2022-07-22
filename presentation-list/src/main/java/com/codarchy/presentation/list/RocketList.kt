@@ -2,6 +2,7 @@ package com.codarchy.presentation.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -23,7 +24,7 @@ import com.codarchy.presentation.InActiveFilterEnabled
 import com.codarchy.presentation.RocketListViewModel
 
 @Composable
-fun RocketList(viewModel: RocketListViewModel) {
+fun RocketList(viewModel: RocketListViewModel, clickListener: (Rocket) -> Unit) {
     val rockets = when (viewModel.filterState.value) {
         is ResetActiveFilter -> viewModel.rawData
         is ActiveFilterEnabled -> viewModel.getActiveRockets()
@@ -36,16 +37,17 @@ fun RocketList(viewModel: RocketListViewModel) {
         items(
             rockets
         ) {
-            RocketItem(rocket = it)
+            RocketItem(rocket = it) { clickListener(it) }
         }
     }
 }
 
 @Composable
-fun RocketItem(rocket: Rocket) {
+fun RocketItem(rocket: Rocket, clickListener: () -> Unit) {
     Box(
         modifier = Modifier
             .border(1.dp, MaterialTheme.colors.primary)
+            .clickable { clickListener() }
             .fillMaxWidth()
             .height(120.dp)
             .background(Color.Black),
