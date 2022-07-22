@@ -1,5 +1,6 @@
 package com.codarchy.presentation
 
+import android.os.Bundle
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -24,11 +25,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import com.codarchy.presentation.fab.MultiFabState
 import com.codarchy.presentation.fab.MultiFloatingActionButton
 import com.codarchy.presentation.list.RocketList
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 
 @Composable
@@ -52,8 +58,10 @@ fun RocketListScreenContent(viewModel: RocketListViewModel = hiltViewModel()) {
                 is NetworkError -> ErrorContent()
                 is GenericError -> ErrorContent()
                 is RocketListReady -> RocketList(viewModel) {
-                    Navigation.findNavController(view)
-                        .navigate(com.codarchy.common.R.id.action_landingFragment_to_rocketDetailsFragment)
+                    val request = NavDeepLinkRequest.Builder
+                        .fromUri("android-app://com.codarchy.presentationdetail.details".toUri())
+                        .build()
+                    Navigation.findNavController(view).navigate(request)
                 }
             }
         }
