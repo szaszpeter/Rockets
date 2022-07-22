@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.codarchy.common.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.compose.ui.res.imageResource
 
 @AndroidEntryPoint
 class RocketListFragment : Fragment() {
@@ -27,7 +28,8 @@ class RocketListFragment : Fragment() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
                     ) {
-                        LandingScreenContent()
+
+                        RocketListScreenContent()
                     }
                 }
             }

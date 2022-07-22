@@ -13,11 +13,13 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LandingViewModel @Inject constructor(
+class RocketListViewModel @Inject constructor(
     private val retrieveRocketsUseCase: RetrieveRocketsUseCase
 ): ViewModel(){
 
+    val rawData = mutableListOf<Rocket>()
     val  state = mutableStateOf<RocketListUIState>(Idle)
+    val  filterState = mutableStateOf<FilterUIState>(ResetActiveFilter)
 
     init {
         requestRockets()
@@ -30,10 +32,30 @@ class LandingViewModel @Inject constructor(
                 when(val rocketReponse = retrieveRocketsUseCase()) {
                     is ResultWrapper.NetworkError -> showNetworkError()
                     is ResultWrapper.GenericError -> showGenericError()
-                    is ResultWrapper.Success -> state.value = RocketListReady(rocketReponse.value)
+                    is ResultWrapper.Success -> {
+                        state.value = RocketListReady(rocketReponse.value)
+                        rawData.addAll(rocketReponse.value)
+                        filterState.value = ResetActiveFilter
+                    }
                 }
             }
         }
+    }
+
+    fun toggleFilter(identifier: String) {
+        when(identifier) {
+            "inactive" -> {filterState.value = InActiveFilterEnabled(getInactiveRockets())}
+            "active" -> {filterState.value = ActiveFilterEnabled(getActiveRockets())}
+            "reset" -> {filterState.value = ResetActiveFilter}
+        }
+    }
+
+    fun getActiveRockets(): List<Rocket> {
+        return rawData.filter { it.active }
+    }
+
+    fun getInactiveRockets(): List<Rocket> {
+        return rawData.filter { !it.active }
     }
 
     private fun showGenericError() {
@@ -51,3 +73,10 @@ object Loading : RocketListUIState()
 object Idle: RocketListUIState()
 object NetworkError: RocketListUIState()
 object GenericError: RocketListUIState()
+
+
+sealed class FilterUIState
+data class ActiveFilterEnabled(val filteredRockets: List<Rocket>): FilterUIState()
+data class InActiveFilterEnabled(val filteredRockets: List<Rocket>): FilterUIState()
+object ResetActiveFilter: FilterUIState()
+
