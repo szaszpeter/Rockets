@@ -12,7 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -21,6 +22,7 @@ import com.codarchy.data.model.Rocket
 import com.codarchy.presentation.ResetActiveFilter
 import com.codarchy.presentation.ActiveFilterEnabled
 import com.codarchy.presentation.InActiveFilterEnabled
+import com.codarchy.presentation.R
 import com.codarchy.presentation.RocketListViewModel
 
 @Composable
@@ -44,63 +46,121 @@ fun RocketList(viewModel: RocketListViewModel, clickListener: (Rocket) -> Unit) 
 
 @Composable
 fun RocketItem(rocket: Rocket, clickListener: () -> Unit) {
+    Spacer(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(8.dp)
+    )
     Box(
         modifier = Modifier
-            .border(1.dp, MaterialTheme.colors.primary)
+            .border(0.5.dp, Color.LightGray)
             .clickable { clickListener() }
             .fillMaxWidth()
-            .height(120.dp)
-            .background(Color.Black),
+            .background(Color.Transparent),
         contentAlignment = Alignment.CenterStart
     ) {
-        Row(modifier = Modifier.padding(8.dp)) {
-            Column(
-                modifier = Modifier.weight(1f),
-                Arrangement.Center
-            ) {
-                val status = if (rocket.active) {
-                    "Yes"
-                } else {
-                    "No"
-                }
-                Text(
-                    text = rocket.name,
-                    style = TextStyle(
-                        color = if (rocket.active) {
-                            Color.Cyan
-                        } else {
-                            Color.Gray
-                        },
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Normal,
-                        fontStyle = FontStyle.Italic
-                    )
-                )
-                Text(
-                    text = "Country : " + rocket.country,
-                    Modifier.padding(0.dp, 4.dp, 0.dp, 0.dp),
-                    style = TextStyle(
-                        color = Color.Yellow,
-                        fontSize = 12.sp
-                    )
-                )
-                Text(
-                    text = "Engines : " + rocket.engines.number.toString(),
-                    Modifier.padding(0.dp, 4.dp, 0.dp, 0.dp),
-                    style = TextStyle(
-                        color = Color.Yellow,
-                        fontSize = 12.sp
-                    )
-                )
-                Text(
-                    text = "Active : $status",
-                    Modifier.padding(0.dp, 4.dp, 0.dp, 0.dp),
-                    style = TextStyle(
-                        color = Color.Yellow,
-                        fontSize = 12.sp
-                    )
-                )
-            }
+        Column {
+            Text(
+                buildAnnotatedString {
+                    withStyle(style = ParagraphStyle(lineHeight = 28.sp)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Light,
+                                color = Color.Cyan
+                            )
+                        ) {
+                            append(rocket.name)
+                        }
+                    }
+                },
+                modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)
+            )
+
+            Text(
+                buildAnnotatedString {
+                    withStyle(style = ParagraphStyle(lineHeight = 28.sp)) {
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.Yellow,
+                                fontWeight = FontWeight.Light
+                            )
+                        ) {
+                            append(stringResource(R.string.country_tag) + " ")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Light,
+                                color = Color.LightGray
+                            )
+                        ) {
+                            append(rocket.country)
+                        }
+                    }
+                },
+                modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp)
+            )
+
+            Text(
+                buildAnnotatedString {
+                    withStyle(style = ParagraphStyle(lineHeight = 28.sp)) {
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.Yellow,
+                                fontWeight = FontWeight.Light
+                            )
+                        ) {
+                            append(stringResource(R.string.engines_tag) + " ")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Light,
+                                color = Color.LightGray
+                            )
+                        ) {
+                            append(rocket.engines.number.toString())
+                        }
+                    }
+                },
+                modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp)
+            )
+
+            Text(
+                buildAnnotatedString {
+                    withStyle(style = ParagraphStyle(lineHeight = 28.sp)) {
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.Yellow,
+                                fontWeight = FontWeight.Light
+                            )
+                        ) {
+                            append(stringResource(R.string.status_tag) + " ")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Light,
+                                color = if (rocket.active) {
+                                    Color.Green
+                                } else {
+                                    Color.Red
+                                }
+                            )
+                        ) {
+                            append(
+                                if (rocket.active) {
+                                    stringResource(R.string.active)
+                                } else {
+                                    stringResource(R.string.inactive)
+                                }
+                            )
+                        }
+                    }
+                },
+                modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp)
+            )
         }
     }
 }

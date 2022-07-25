@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="country_tag">Country: </string>
+    <string name="engines_tag">Engines: </string>
+    <string name="status_tag">Status: </string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
+</resources>
