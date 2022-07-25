@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_tag">"Name: "</string>
+    <string name="description_tag">"Description: "</string>
+    <string name="country_tag">"Country: "</string>
+    <string name="height_tag">"Height: "</string>
+    <string name="meter_um">m</string>
+    <string name="mass_tag">"Mass: "</string>
+    <string name="kg_um">kg</string>
+    <string name="launch_name_tag">"Launch Name: "</string>
+    <string name="date">"Date: "</string>
+    <string name="result_tag">"Result: "</string>
+    <string name="success_label">Success</string>
+    <string name="failure_label">Failure</string>
+</resources>
