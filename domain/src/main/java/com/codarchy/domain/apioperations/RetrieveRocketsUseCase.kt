@@ -1,4 +1,4 @@
-package com.codarchy.domain
+package com.codarchy.domain.apioperations
 
 import com.codarchy.data.errorhandling.ResultWrapper
 import com.codarchy.data.model.Rocket
