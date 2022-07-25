@@ -27,8 +27,7 @@ class RocketDetailsFragment : Fragment() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
                     ) {
-
-//                        RocketListScreenContent()
+                        RocketDetailsScreenContent()
                     }
                 }
             }

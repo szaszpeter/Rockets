@@ -27,7 +27,6 @@ class RocketListFragment : Fragment() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
                     ) {
-
                         RocketListScreenContent()
                     }
                 }

@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codarchy.data.errorhandling.ResultWrapper
 import com.codarchy.data.model.Rocket
-import com.codarchy.domain.RetrieveRocketsUseCase
+import com.codarchy.domain.apioperations.RetrieveRocketsUseCase
+import com.codarchy.domain.rocketselection.SaveSelectedRocketUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RocketListViewModel @Inject constructor(
-    private val retrieveRocketsUseCase: RetrieveRocketsUseCase
+    private val retrieveRocketsUseCase: RetrieveRocketsUseCase,
+    private val saveSelectedRocketUseCase: SaveSelectedRocketUseCase
 ): ViewModel(){
 
     val rawData = mutableListOf<Rocket>()
@@ -41,6 +43,8 @@ class RocketListViewModel @Inject constructor(
             }
         }
     }
+
+    fun selectRocket(rocket: Rocket?) = saveSelectedRocketUseCase(rocket)
 
     fun toggleFilter(identifier: String) {
         when(identifier) {
