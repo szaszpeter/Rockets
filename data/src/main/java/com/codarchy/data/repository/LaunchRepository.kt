@@ -14,5 +14,5 @@ import javax.inject.Singleton
 class LaunchRepository @Inject constructor(private val api: RocketApi) {
     suspend fun requestLaunchByRocketId(rocketId: String): ResultWrapper<List<Launch>> = safeApiCall { api.getLaunchesByRocketId(
         LaunchQuery(Query(rocketId))
-    ).map { it.toLaunch() } }
+    ).docs.map { it.toLaunch() } }
 }

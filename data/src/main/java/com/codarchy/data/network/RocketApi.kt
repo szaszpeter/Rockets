@@ -12,5 +12,5 @@ interface RocketApi {
     suspend fun getRocketList(): List<RocketResponse>
 
     @POST("/v5/launches/query")
-    suspend fun getLaunchesByRocketId(@Body query: LaunchQuery): List<LaunchResponse>
+    suspend fun getLaunchesByRocketId(@Body query: LaunchQuery): LaunchResponseWrapper
 }

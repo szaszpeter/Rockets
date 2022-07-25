@@ -10,6 +10,9 @@ import javax.inject.Singleton
 
 @Singleton
 class RocketRepository @Inject constructor(private val api: RocketApi) {
+
+    var savedRocket: Rocket? = null
+
     suspend fun requestRocketList(): ResultWrapper<List<Rocket>> = safeApiCall {
         api.getRocketList()
             .map { it.toRocket() }
