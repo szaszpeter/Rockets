@@ -10,6 +10,7 @@ Sample application consuming the [Space-X Rest API](https://github.com/r-spacex/
 
 ## Technologies / Patterns
 - Project modularisation: Data, Domain, Presentation, Common
+- Clean Architecture Concepts
 - Dependency Injection Setup with Hilt
 - MVVM Pattern
 - Use Cases for managing data flow
