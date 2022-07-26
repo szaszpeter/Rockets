@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.codarchy.common.ErrorContent
 import com.codarchy.common.Loading
@@ -43,10 +44,21 @@ fun RocketListScreenContent(viewModel: RocketListViewModel = hiltViewModel()) {
                 is GenericError -> ErrorContent()
                 is RocketListReady -> RocketList(viewModel) {
                     viewModel.selectRocket(it)
+                    val navOptions =
+                        NavOptions.Builder()
+//                            .setPopUpTo(
+//                                R.id.nav_graph_main,
+//                                false
+//                            )
+                            .setEnterAnim(R.anim.slide_in_right)
+                            .setExitAnim(R.anim.slide_out_left)
+                            .setPopEnterAnim(R.anim.slide_in_left)
+                            .setPopExitAnim(R.anim.slide_out_right)
+                            .build()
                     val request = NavDeepLinkRequest.Builder
                         .fromUri("android-app://com.codarchy.presentationdetail.details".toUri())
                         .build()
-                    Navigation.findNavController(view).navigate(request)
+                    Navigation.findNavController(view).navigate(request, navOptions)
                 }
             }
         }
