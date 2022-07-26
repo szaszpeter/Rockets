@@ -5,7 +5,7 @@ Sample application consuming the [Space-X Rest API](https://github.com/r-spacex/
 - US1 - List of Rockets, Welcome Screen (Only shown on first opening)
 - US2 - Filter rockets by Active/Inactive
 - US3 - Rocket Details Screen 
-- US4 - Animations
+- US4 - Animations, Unit Tests (RocketRepository, LaunchRepository)
 
 
 ## Technologies / Patterns
