@@ -44,4 +44,12 @@ dependencies {
     // HILT
     implementation("com.google.dagger:hilt-android:2.40.5")
     kapt("com.google.dagger:hilt-android-compiler:2.40.5")
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.mockito:mockito-core:4.6.1"
+    // JVM-based unit tests (that don't need a real device or emulator)
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0-RC"
+
+
 }
