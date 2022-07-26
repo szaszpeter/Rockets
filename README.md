@@ -2,9 +2,10 @@
 Sample application consuming the [Space-X Rest API](https://github.com/r-spacex/SpaceX-API) to display a list of rockets and the technical details of them.
 
 ## Features
-- US1 - List of Rockets
+- US1 - List of Rockets, Welcome Screen (Only shown on first opening)
 - US2 - Filter rockets by Active/Inactive
-- US3 - Rocket Details Screen
+- US3 - Rocket Details Screen 
+- US4 - Animations
 
 
 ## Technologies / Patterns
